@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def new
+    flash[:errors] = [request.location.city]
     render :new
   end
 
@@ -25,8 +26,5 @@ class SessionsController < ApplicationController
     render :new
 
   end
-
-
-
 
 end
