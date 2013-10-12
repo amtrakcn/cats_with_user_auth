@@ -1,5 +1,5 @@
 class Cat < ActiveRecord::Base
-  attr_accessible :age, :birth_date, :color, :name, :sex
+  attr_accessible :age, :birth_date, :color, :name, :sex, :user_id
 
   validates :age, :birth_date, :color, :name, :sex, :presence => true
   validates :color, inclusion: { in: ["black","white","brown","grey"] }
@@ -12,4 +12,9 @@ class Cat < ActiveRecord::Base
     primary_key: "id",
     :dependent => :destroy
   )
+
+  belongs_to :user
+
+
+
 end

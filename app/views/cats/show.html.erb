@@ -6,19 +6,23 @@
 	 <li>Color: <%= @cat.color %></li>
 	 <li>Name: <%= @cat.name %></li>
 	 <li>Sex: <%= @cat.sex %></li>
+	 <li>Owner: <%= @cat.user.user_name %></li>
 </ul>
 
-<h3>Rental requests</h3>
-<ul>
-	<% @rental_requests.each do |rental_request| %>
-	<li>
-		From <%= rental_request.start_date %> to <%= rental_request.end_date %>
-		<% if rental_request.pending?%>
-		<%= button_to "Approve", approve_cat_rental_request_url(rental_request), :method => :post %>
-		<%= button_to "Deny", deny_cat_rental_request_url(rental_request), :method => :post %>
-		<%else%>
-		<%= ": #{rental_request.status}" %>
-		<%end%>
-	</li>
-	<% end %>
+
+	<% if !current_user.nil? && @cat.user_id == current_user.id %>
+	<h3>Rental requests</h3>
+	<ul>
+		<% @rental_requests.each do |rental_request| %>
+		<li>
+			From <%= rental_request.start_date %> to <%= rental_request.end_date %>
+			<% if rental_request.pending?%>
+			<%= button_to "Approve", approve_cat_rental_request_url(rental_request), :method => :post %>
+			<%= button_to "Deny", deny_cat_rental_request_url(rental_request), :method => :post %>
+			<%else%>
+			<%= ": #{rental_request.status}" %>
+			<%end%>
+		</li>
+		<% end %>
+  <% end %>
 </ul>

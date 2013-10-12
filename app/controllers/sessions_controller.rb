@@ -12,9 +12,10 @@ class SessionsController < ApplicationController
       login_user!(@user)
       redirect_to cats_url
     else
-      #flash[:errors] = "Login Failed"
+      flash[:errors] = []
+      flash[:errors] << "Your login failed"
+      flash[:errors] << "And you suck"
       render :new
-      render text: "credential bad"
     end
   end
 

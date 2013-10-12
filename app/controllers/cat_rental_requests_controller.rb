@@ -1,4 +1,6 @@
 class CatRentalRequestsController < ApplicationController
+  before_filter :owns_cat!, only: [:approve, :deny]
+
   def new
     @cats = Cat.all
     render :request_form
